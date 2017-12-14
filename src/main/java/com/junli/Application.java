@@ -14,6 +14,5 @@ public class Application {
         System.out.println("SpringBoot开始启动。。。。");
         SpringApplication.run(Application.class, args);
         System.out.println("SpringBoot启动成功");
-        System.out.println("主分支合并到子分支");
     }
 }
