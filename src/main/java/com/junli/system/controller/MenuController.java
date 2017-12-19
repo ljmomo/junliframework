@@ -3,12 +3,17 @@ package com.junli.system.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.junli.common.utils.JSONUtils;
 import com.junli.common.utils.R;
 import com.junli.system.entity.Menu;
 import com.junli.system.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -81,6 +86,24 @@ public class MenuController {
         } else {
             return R.error("修改失败！");
         }
+    }
+
+
+
+    /**
+     * @param page
+     * @param menu
+     * @return
+     */
+    @GetMapping(value = "/listAll")
+    @ResponseBody
+    public List<Menu> listAll(Menu menu) throws Exception {
+        List<Menu> menus = menuService.selectList(null);
+
+        Map<Long, List<Menu>> collect = menus.stream().collect(Collectors.groupingBy(Menu::getParentId));
+
+        System.out.println(JSONUtils.obj2json(collect));
+        return menus;
     }
 
 }

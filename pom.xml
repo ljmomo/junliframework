@@ -32,6 +32,7 @@
         <velocity-engine-core>2.0</velocity-engine-core>
         <shiro-spring>1.4.0</shiro-spring>
         <shiro-ehcache>1.4.0</shiro-ehcache>
+        <thymeleaf-extras-shiro>1.2.1</thymeleaf-extras-shiro>
     </properties>
 
     <dependencies>
@@ -66,6 +67,15 @@
             <version>${druid-spring-boot-starter}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+        </dependency>
+
         <!-- mybatis-plus begin -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -91,6 +101,11 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro-spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>${thymeleaf-extras-shiro}</version>
         </dependency>
 
         <dependency>

@@ -1,5 +1,6 @@
 package com.junli.common.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.junli.common.shiro.BDSessionListener;
 import com.junli.common.shiro.MyAuthRealm;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -115,7 +116,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/index");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
@@ -124,7 +125,9 @@ public class ShiroConfig {
         //拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/static/**", "anon");
+        //filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/layui/**", "anon");
+
 
         //druid 不拦截
         filterChainDefinitionMap.put("/druid/**", "anon");
@@ -171,4 +174,8 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
+    }
 }
