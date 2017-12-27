@@ -4,9 +4,11 @@ package com.junli.system.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.junli.common.utils.JSONUtils;
+import com.junli.common.utils.MenuUtils;
 import com.junli.common.utils.R;
 import com.junli.system.entity.Menu;
 import com.junli.system.service.MenuService;
+import com.junli.system.vo.MenuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -101,8 +103,11 @@ public class MenuController {
         List<Menu> menus = menuService.selectList(null);
 
         Map<Long, List<Menu>> collect = menus.stream().collect(Collectors.groupingBy(Menu::getParentId));
-
+        Map<Boolean, List<Menu>> collect1 = menus.stream().collect(Collectors.partitioningBy(a -> a.getParentId() == 0 ? true : false));
+        System.out.println(JSONUtils.obj2json(collect1));
         System.out.println(JSONUtils.obj2json(collect));
+        List<MenuVo> menuVos = MenuUtils.progressMenu(menus);
+        System.out.println("封装后的："+JSONUtils.obj2json(menuVos));
         return menus;
     }
 
