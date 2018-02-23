@@ -18,6 +18,8 @@ spring:
         pool-prepared-statements: true
         max-open-prepared-statements: 20
         connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    application:
+      name: junliframework
         #stat-view-servlet:
           #login-username: lijun
           #login-password: lijun
@@ -56,3 +58,30 @@ mybatis-plus:
 #logging
 logging:
   config: classpath:logback-spring.xml
+endpoints:
+  env:
+    enabled: true
+  beans:
+    enabled: true
+  autoconfig:
+    enabled: true
+#监控检查安全
+management:
+  security:
+    enabled: false
+#端口
+server:
+  port: 9090
+#eureka
+#eureka:
+  #instance:
+    #hostname: localhost
+  #client:
+    #service-url:
+       #defaultZone: http://peer1:1111/eureka/,http://peer2:1112/eureka/
+
+
+
+
+
+
